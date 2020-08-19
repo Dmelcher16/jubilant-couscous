@@ -1,16 +1,7 @@
-.button {
-    background-color: aqua;
-
-}
-.control {
-    width: 200px;
-}
-.container {
-    display: inline-block;
-}
-.carousel-container {
-    display: inline;
+.field {
+    padding-top: 30px;
 }
 
-
-
+html {
+    background-image: url();
+}
