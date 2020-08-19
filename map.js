@@ -43,3 +43,29 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 window.onload = function () {
   setMapViewBounds(map);
 }
+
+
+$("#searchBtn").on("click", function (city) {
+  event.preventDefault();
+  let cityString = $("#city").val();
+  getLatLon(cityString);
+});
+function getLatLon(burrito) {
+  console.log(city)
+  let queryURL = apiCall + burrito + "&appid=" + apiKey
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response)
+    let latitude = response.coord.lat
+    let longitude = response.coord.lon
+    console.log(latitude)
+    console.log(longitude)
+    nasaAPI(latitude, longitude)
+  })
+}
+
+let apiKey = "93b75b830f3da96083a3b6252ba8705b"; //API KEY
+let apiCall = "http://api.openweathermap.org/data/2.5/weather?q="; //API CALL BASED ON CITY NAME
+let apiCallLatLon = "http://api.openweathermap.org/data/2.5/uvi?appid="; //API CALL BASED ON LATITUDE AND LONGITUDE
