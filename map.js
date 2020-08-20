@@ -11,19 +11,18 @@ function setMapViewBounds(map){
   });
 }
 
-// // jfarrish code not working yet....
-// function getMap(map, lat, long){
+// jfarrish code not working yet....
+// function setMapViewBounds(map, lat, long){
   
-//   let ulX = long - .01500;
+//   let ulX = lat - .01500;
 //   let ulY = long - .01500;
-//   let lrX = long + .01500;
+//   let lrX = lat + .01500;
 //   let lrY = long + .01500;
   
+//   console.log(ulX,ulY, lrX,lrY);
 //   let searchArea = new H.geo.Rect(ulX, ulY, lrX, lrY);
 //   map.getViewModel().setLookAtData({bounds:searchArea});
 // }
-
-
 
 /**
  * Boilerplate map initialization code starts below:
@@ -54,19 +53,29 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-// Now use the map as required...
+// // Now use the map as required...
 // window.onload = function () {
 //   setMapViewBounds(map);
 // }
 
-
 $(document).ready(function () {
 
-  setMapViewBounds(map)
+  // setMapViewBounds(map, 32.2226, 110.9747);
+   setMapViewBounds(map);
 
-$("#searchBtn").on("click", function (city) {
+
+
+  // $("#citySearchButton").on("click", function () {
+  //   event.preventDefault();
+  //   console.log('click');
+  //   let cityStr = $("#cityInput")
+  //   buildQueryURL(cityStr.val());
+
+  // }); 
+
+$("#citySearchButton").on("click", function () {
   event.preventDefault();
-  let cityString = $("#city").val();
+  let cityString = $("#cityInput").val();
   console.log(cityString)
   getLatLon(cityString);
 });
