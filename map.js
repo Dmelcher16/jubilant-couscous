@@ -59,12 +59,8 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 //   setMapViewBounds(map);
 // }
 
-
-
-   setMapViewBounds(map, -31.953512, 115.857048);
+   setMapViewBounds(map, 51.509865, -0.118092);
     // setMapViewBounds(map);
-
-
 
 $("#citySearchButton").on("click", function () {
   event.preventDefault();
