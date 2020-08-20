@@ -1,14 +1,29 @@
+
 /**
  * Moves the map to display over Boston using viewBounds
  *
  * @param  {H.Map} map      A HERE Map instance within the application
  */
 function setMapViewBounds(map){
-  var bbox = new H.geo.Rect(42.3736,-71.0751,42.3472,-71.0408);
+  var bbox = new H.geo.Rect(42.3736,-71.0751,42.3472,-71.0408); // diff of .012455 .018017 .013945 .016283
   map.getViewModel().setLookAtData({
     bounds: bbox
   });
 }
+
+// // jfarrish code not working yet....
+// function getMap(map, lat, long){
+  
+//   let ulX = long - .01500;
+//   let ulY = long - .01500;
+//   let lrX = long + .01500;
+//   let lrY = long + .01500;
+  
+//   let searchArea = new H.geo.Rect(ulX, ulY, lrX, lrY);
+//   map.getViewModel().setLookAtData({bounds:searchArea});
+// }
+
+
 
 /**
  * Boilerplate map initialization code starts below:
@@ -40,16 +55,22 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
 // Now use the map as required...
-window.onload = function () {
-  setMapViewBounds(map);
-}
+// window.onload = function () {
+//   setMapViewBounds(map);
+// }
 
+
+$(document).ready(function () {
+
+  setMapViewBounds(map)
 
 $("#searchBtn").on("click", function (city) {
   event.preventDefault();
   let cityString = $("#city").val();
+  console.log(cityString)
   getLatLon(cityString);
 });
+
 function getLatLon(burrito) {
   console.log(city)
   let queryURL = apiCall + burrito + "&appid=" + apiKey
@@ -62,10 +83,12 @@ function getLatLon(burrito) {
     let longitude = response.coord.lon
     console.log(latitude)
     console.log(longitude)
-    nasaAPI(latitude, longitude)
+    //nasaAPI(latitude, longitude)
+    // getMap(map, latitude, longitude);
   })
 }
 
 let apiKey = "93b75b830f3da96083a3b6252ba8705b"; //API KEY
 let apiCall = "http://api.openweathermap.org/data/2.5/weather?q="; //API CALL BASED ON CITY NAME
-let apiCallLatLon = "http://api.openweathermap.org/data/2.5/uvi?appid="; //API CALL BASED ON LATITUDE AND LONGITUDE
+let apiCallLatLon = "http://api.openweathermap.org/data/2.5/uvi?appid="; //API CALL BASED ON LATITUDE AND LONGIT
+});
