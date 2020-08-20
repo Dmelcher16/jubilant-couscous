@@ -47,7 +47,7 @@ function performNasaCall(enchilada1, enchilada2) {
 
 function buildLanSatImg(quesadilla1, quesadilla2) {
     $("#lanSatImgHolder").append("<img id=satImg src=" + quesadilla1 + ">")
-        // $("#satImg").width("500px").height("400px").attr("src", quesadilla1)
+        $("#satImg").width("500px").height("400px").attr("src", quesadilla1)
 
 }
 
