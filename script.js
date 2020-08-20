@@ -1,7 +1,8 @@
 let apiKey = "93b75b830f3da96083a3b6252ba8705b"; //API KEY FOR WEATHER DATA
 let nasaAPI = "irUwmwRn4hX38ufW6j4F6Vln3GgkMqD9ZfWGlXBg"; //API KEY FOR NASA "EARTH" API
 let apiCall = "http://api.openweathermap.org/data/2.5/forecast?q="; //API CALL BASED ON CITY NAME
-let date = "2020-01-01"
+let date = moment().format('YYYY' + '-' + 'MM' + '-' + 'DD')
+console.log(date)
 
 
 $("#searchBtn").on("click", function() {
@@ -24,13 +25,13 @@ function getLatLon(burrito) {
         console.log(population);
         console.log(latitude);
         console.log(longitude);
-        performNasaCall(latitude, longitude);
+        performNasaCall(latitude, longitude, population);
     })
 };
 
 // getLatLon();
 
-function performNasaCall(enchilada1, enchilada2) {
+function performNasaCall(enchilada1, enchilada2, enchilada3) {
     let nasaURL = "https://api.nasa.gov/planetary/earth/assets?lon=" + enchilada2 + "&lat=" + enchilada1 + "&date=" + date + "&&dim=0.50&api_key=" + nasaAPI; //date format - YYYY/MM/DD
     $.ajax({
         url: nasaURL,
@@ -38,18 +39,28 @@ function performNasaCall(enchilada1, enchilada2) {
     }).then(function(response) {
         console.log(response);
         let lanSatURL = response.url;
-        let lanSatDate = response.date;
+        let lanSatDateTime = response.date.slice(0, 10) + " at " +
+            response.date.slice(11, 19);
+        let pop = enchilada3;
         console.log(lanSatURL);
-        buildLanSatImg(lanSatURL, lanSatDate);
+        buildLanSatImg(lanSatURL, lanSatDateTime, pop);
+        console.log(enchilada3);
+        console.log(pop);
     })
 
 }
 
-function buildLanSatImg(quesadilla1, quesadilla2) {
-    $("#lanSatImgHolder").append("<img id=satImg src=" + quesadilla1 + ">")
-        // $("#satImg").width("500px").height("400px").attr("src", quesadilla1)
+function buildLanSatImg(quesadilla1, quesadilla2, quesadilla3) {
+    $("#lanSatImgHolder").append("<img id=satImg src=" + quesadilla1 + ">");
+    $("#lanSatImgHolder").append("<p>" + "Image taken : " + quesadilla2 + "</p>");
+    $("#stats").append("<p>" + "Population : " + quesadilla3 + "</p>");
 
 }
+
+// function buildStats(empanada1, empanada2, empanada3) {
+
+
+// }
 
 
 
