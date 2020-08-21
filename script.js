@@ -59,6 +59,7 @@ function performNasaCall(enchilada1, enchilada2, enchilada3) {
 
 function buildLanSatImg(quesadilla1, quesadilla2, quesadilla3) {
     $("#lanSatImgHolder").append("<img id=satImg src=" + quesadilla1 + ">");
+    $(".image").append("<img id=satImg src=" + quesadilla1 + ">");
     $("#lanSatImgHolder").append("<p>" + "Image taken : " + quesadilla2 + "</p>");
     $("#stats").append("<p>" + "Population : " + quesadilla3 + "</p>");
     getMap(mLat, mLon);
