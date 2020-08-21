@@ -51,6 +51,19 @@ function buildLanSatImg(quesadilla1, quesadilla2) {
 
 }
 
+var openModal = $("#openBtn")
+var openBtn = $("#larger")
+var closeModal = $("#closeBtn")
+
+openBtn.on("click", function(){
+    openModal.removeClass("modal").addClass("modal is-active")
+})
+
+closeModal.on("click", function(){
+    openModal.removeClass("modal is-active").addClass("modal")
+})
+
+
 
 
 
