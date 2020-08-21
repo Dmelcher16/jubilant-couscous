@@ -16,3 +16,21 @@ html {
     width: 100%;
     height: 400px;
 }
+
+#larger {
+    font-size: small;
+}
+
+#lanSatImgHolder { 
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #hide {
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+      cursor: unset;
+     
+  }
