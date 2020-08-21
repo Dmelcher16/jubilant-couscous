@@ -10,7 +10,7 @@ let mLat, mLon;
 
 
 
-$("#searchBtn").on("click", function() {
+$("#searchBtn").on("click", function () {
     event.preventDefault();
     let cityString = $("#city").val();
     getLatLon(cityString);
@@ -22,7 +22,7 @@ function getLatLon(burrito) {
     $.ajax({
         url: queryURL,
         method: "GET",
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response);
         let latitude = response.city.coord.lat;
         let longitude = response.city.coord.lon;
@@ -43,7 +43,7 @@ function performNasaCall(enchilada1, enchilada2, enchilada3) {
     $.ajax({
         url: nasaURL,
         method: "GET",
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response);
         let lanSatURL = response.url;
         let lanSatDateTime = response.date.slice(0, 10) + " at " +
@@ -69,11 +69,11 @@ var openModal = $("#openBtn")
 var openBtn = $("#larger")
 var closeModal = $("#closeBtn")
 
-openBtn.on("click", function(){
+openBtn.on("click", function () {
     openModal.removeClass("modal").addClass("modal is-active")
 })
 
-closeModal.on("click", function(){
+closeModal.on("click", function () {
     openModal.removeClass("modal is-active").addClass("modal")
 })
 
