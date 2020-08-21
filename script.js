@@ -3,6 +3,11 @@ let nasaAPI = "irUwmwRn4hX38ufW6j4F6Vln3GgkMqD9ZfWGlXBg"; //API KEY FOR NASA "EA
 let apiCall = "http://api.openweathermap.org/data/2.5/forecast?q="; //API CALL BASED ON CITY NAME
 let date = moment().format('YYYY' + '-' + 'MM' + '-' + 'DD')
 console.log(date)
+let hM = document.createElement('map.js');
+hM.src = "./map.js"
+document.head.appendChild(hM);
+let mLat, mLon;
+
 
 
 $("#searchBtn").on("click", function() {
@@ -22,6 +27,8 @@ function getLatLon(burrito) {
         let latitude = response.city.coord.lat;
         let longitude = response.city.coord.lon;
         let population = response.city.population;
+        mLat = latitude;
+        mLon = longitude;
         console.log(population);
         console.log(latitude);
         console.log(longitude);
@@ -54,7 +61,7 @@ function buildLanSatImg(quesadilla1, quesadilla2, quesadilla3) {
     $("#lanSatImgHolder").append("<img id=satImg src=" + quesadilla1 + ">");
     $("#lanSatImgHolder").append("<p>" + "Image taken : " + quesadilla2 + "</p>");
     $("#stats").append("<p>" + "Population : " + quesadilla3 + "</p>");
-
+    getMap(mLat, mLon);
 }
 
 var openModal = $("#openBtn")
