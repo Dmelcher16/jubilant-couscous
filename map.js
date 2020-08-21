@@ -1,28 +1,29 @@
-
+$(document).ready(function () {
 /**
  * Moves the map to display over Boston using viewBounds
  *
  * @param  {H.Map} map      A HERE Map instance within the application
  */
-function setMapViewBounds(map){
-  var bbox = new H.geo.Rect(42.3736,-71.0751,42.3472,-71.0408); // diff of .012455 .018017 .013945 .016283
-  map.getViewModel().setLookAtData({
-    bounds: bbox
-  });
-}
+// function setMapViewBounds(map){
+//   // var bbox = new H.geo.Rect(42.3736,-71.0751,42.3472,-71.0408); // diff of .012455 .018017 .013945 .016283
+//   var bbox = new H.geo.Rect(32.2135, -110.9909,32.30226, -110.9566,); //32.2226, 110.9909
+//   map.getViewModel().setLookAtData({
+//     bounds: bbox
+//   });
+// }
 
 // jfarrish code not working yet....
-// function setMapViewBounds(map, lat, long){
+function setMapViewBounds(map, lat, long){
   
-//   let ulX = lat - .01500;
-//   let ulY = long - .01500;
-//   let lrX = lat + .01500;
-//   let lrY = long + .01500;
+  let ulX = lat + .0800;
+  let ulY = long + .0800;
+  let lrX = lat - .0800;
+  let lrY = long - .0800;
   
-//   console.log(ulX,ulY, lrX,lrY);
-//   let searchArea = new H.geo.Rect(ulX, ulY, lrX, lrY);
-//   map.getViewModel().setLookAtData({bounds:searchArea});
-// }
+  console.log(ulX,ulY, lrX,lrY);
+  let searchArea = new H.geo.Rect(ulX, ulY, lrX, lrY);
+  map.getViewModel().setLookAtData({bounds:searchArea});
+}
 
 /**
  * Boilerplate map initialization code starts below:
@@ -31,14 +32,14 @@ function setMapViewBounds(map){
 //Step 1: initialize communication with the platform
 // In your own code, replace variable window.apikey with your own apikey
 var platform = new H.service.Platform({
-  apikey: "3wbX1-4-hiUtzWi3K-48hrY784nkb-LwXZoxxJpllqs"
+  apikey: "SzERNuJHlZCu3e1fqJD4aHKQGlWvkgoEbF-Li58KFPk"
 });
 var defaultLayers = platform.createDefaultLayers();
 
 //Step 2: initialize a map - this map is centered over Europe
 var map = new H.Map(document.getElementById('mapArea'),
   defaultLayers.vector.normal.map,{
-  center: {lat:50, lng:5},
+  center: {lat:0, lng:0},
   zoom: 4,
   pixelRatio: window.devicePixelRatio || 1
 });
@@ -53,25 +54,13 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-// // Now use the map as required...
+// Now use the map as required...
 // window.onload = function () {
 //   setMapViewBounds(map);
 // }
 
-$(document).ready(function () {
-
-  // setMapViewBounds(map, 32.2226, 110.9747);
-   setMapViewBounds(map);
-
-
-
-  // $("#citySearchButton").on("click", function () {
-  //   event.preventDefault();
-  //   console.log('click');
-  //   let cityStr = $("#cityInput")
-  //   buildQueryURL(cityStr.val());
-
-  // }); 
+   setMapViewBounds(map, 51.509865, -0.118092);
+    // setMapViewBounds(map);
 
 $("#citySearchButton").on("click", function () {
   event.preventDefault();
