@@ -1,4 +1,6 @@
-$(document).ready(function () {
+console.log("loaded map")
+
+
 /**
  * Moves the map to display over Boston using viewBounds
  *
@@ -13,16 +15,17 @@ $(document).ready(function () {
 // }
 
 // jfarrish code not working yet....
-function setMapViewBounds(map, lat, long){
-  
-  let ulX = lat + .0800;
-  let ulY = long + .0800;
-  let lrX = lat - .0800;
-  let lrY = long - .0800;
-  
-  console.log(ulX,ulY, lrX,lrY);
+function setMapViewBounds(map, lat, long) {
+
+  let ulX = lat + 0.1000;
+  let ulY = long + 0.1000;
+  let lrX = lat - 0.1000;
+  let lrY = long - 0.1000;
+
+  console.log(ulX, ulY, lrX, lrY);
   let searchArea = new H.geo.Rect(ulX, ulY, lrX, lrY);
-  map.getViewModel().setLookAtData({bounds:searchArea});
+  map.getViewModel().setLookAtData({ bounds: searchArea });
+
 }
 
 /**
@@ -32,14 +35,14 @@ function setMapViewBounds(map, lat, long){
 //Step 1: initialize communication with the platform
 // In your own code, replace variable window.apikey with your own apikey
 var platform = new H.service.Platform({
-  apikey: "SzERNuJHlZCu3e1fqJD4aHKQGlWvkgoEbF-Li58KFPk"
+  apikey: "lZJH8sp0pz0p3b0n6IcmBXC6swBQWkeam3I5GT90PGU"
 });
 var defaultLayers = platform.createDefaultLayers();
 
 //Step 2: initialize a map - this map is centered over Europe
 var map = new H.Map(document.getElementById('mapArea'),
-  defaultLayers.vector.normal.map,{
-  center: {lat:0, lng:0},
+  defaultLayers.vector.normal.map, {
+  center: { lat: 0, lng: 0 },
   zoom: 4,
   pixelRatio: window.devicePixelRatio || 1
 });
@@ -54,39 +57,11 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-// Now use the map as required...
-// window.onload = function () {
-//   setMapViewBounds(map);
-// }
+//setMapViewBounds(map, 51.509865, -0.118092);
+// setMapViewBounds(map);
 
-   setMapViewBounds(map, 51.509865, -0.118092);
-    // setMapViewBounds(map);
+function getMap(lat, lon) {
+  console.log("rcvd coords" + lat + lon)
+  setMapViewBounds(map, lat, lon);
 
-$("#citySearchButton").on("click", function () {
-  event.preventDefault();
-  let cityString = $("#cityInput").val();
-  console.log(cityString)
-  getLatLon(cityString);
-});
-
-function getLatLon(burrito) {
-  console.log(city)
-  let queryURL = apiCall + burrito + "&appid=" + apiKey
-  $.ajax({
-    url: queryURL,
-    method: "GET",
-  }).then(function (response) {
-    console.log(response)
-    let latitude = response.coord.lat
-    let longitude = response.coord.lon
-    console.log(latitude)
-    console.log(longitude)
-    //nasaAPI(latitude, longitude)
-    // getMap(map, latitude, longitude);
-  })
 }
-
-let apiKey = "93b75b830f3da96083a3b6252ba8705b"; //API KEY
-let apiCall = "http://api.openweathermap.org/data/2.5/weather?q="; //API CALL BASED ON CITY NAME
-let apiCallLatLon = "http://api.openweathermap.org/data/2.5/uvi?appid="; //API CALL BASED ON LATITUDE AND LONGIT
-});

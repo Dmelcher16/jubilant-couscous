@@ -3,9 +3,14 @@ let nasaAPI = "irUwmwRn4hX38ufW6j4F6Vln3GgkMqD9ZfWGlXBg"; //API KEY FOR NASA "EA
 let apiCall = "http://api.openweathermap.org/data/2.5/forecast?q="; //API CALL BASED ON CITY NAME
 let date = moment().format('YYYY' + '-' + 'MM' + '-' + 'DD')
 console.log(date)
+let hM = document.createElement('map.js');
+hM.src = "./map.js"
+document.head.appendChild(hM);
+let mLat, mLon;
 
 
-$("#searchBtn").on("click", function() {
+
+$("#searchBtn").on("click", function () {
     event.preventDefault();
     let cityString = $("#city").val();
     getLatLon(cityString);
@@ -17,11 +22,13 @@ function getLatLon(burrito) {
     $.ajax({
         url: queryURL,
         method: "GET",
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response);
         let latitude = response.city.coord.lat;
         let longitude = response.city.coord.lon;
         let population = response.city.population;
+        mLat = latitude;
+        mLon = longitude;
         console.log(population);
         console.log(latitude);
         console.log(longitude);
@@ -36,7 +43,7 @@ function performNasaCall(enchilada1, enchilada2, enchilada3) {
     $.ajax({
         url: nasaURL,
         method: "GET",
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response);
         let lanSatURL = response.url;
         let lanSatDateTime = response.date.slice(0, 10) + " at " +
@@ -54,18 +61,18 @@ function buildLanSatImg(quesadilla1, quesadilla2, quesadilla3) {
     $("#lanSatImgHolder").append("<img id=satImg src=" + quesadilla1 + ">");
     $("#lanSatImgHolder").append("<p>" + "Image taken : " + quesadilla2 + "</p>");
     $("#stats").append("<p>" + "Population : " + quesadilla3 + "</p>");
-
+    getMap(mLat, mLon);
 }
 
 var openModal = $("#openBtn")
 var openBtn = $("#larger")
 var closeModal = $("#closeBtn")
 
-openBtn.on("click", function(){
+openBtn.on("click", function () {
     openModal.removeClass("modal").addClass("modal is-active")
 })
 
-closeModal.on("click", function(){
+closeModal.on("click", function () {
     openModal.removeClass("modal is-active").addClass("modal")
 })
 
